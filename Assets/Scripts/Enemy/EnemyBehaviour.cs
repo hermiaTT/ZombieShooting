@@ -74,7 +74,7 @@ public class EnemyBehaviour : MonoBehaviour
     //Animation support
     Animator enemyAnimator;
     string enemyCurrentState;
-    bool gethurt = false;
+    bool isHurt = false;
     const string ZOMBIE_IDLE = "Zombie_Idle";
     const string ZOMBIE_RUN = "Zombie_Run";
     const string ZOMBIE_DEAD = "Zombie_Dead";
@@ -124,15 +124,15 @@ public class EnemyBehaviour : MonoBehaviour
         healthSystem.DeadCheck();
 
         //animation control
-       if(!gethurt && !healthSystem.IsDead && !chasing) 
+       if(!isHurt && !healthSystem.IsDead && !chasing) 
         {
             enemyAnimator.Play(ZOMBIE_IDLE);
         }
-       else if(!gethurt && !healthSystem.IsDead && chasing)
+       else if(!isHurt && !healthSystem.IsDead && chasing)
         {
             enemyAnimator.Play(ZOMBIE_RUN);
         }
-       else if(gethurt && !healthSystem.IsDead)
+       else if(isHurt && !healthSystem.IsDead)
         {
             enemyAnimator.Play(ZOMBIE_HURT);
         }
@@ -192,7 +192,7 @@ public class EnemyBehaviour : MonoBehaviour
             bulletDmg = collision.gameObject.GetComponent<BulletController>().Damage;
 
             healthSystem.DmgTaken(bulletDmg);
-            gethurt = true;
+            isHurt = true;
             
         }
     }
@@ -201,12 +201,14 @@ public class EnemyBehaviour : MonoBehaviour
     //animation event
     public void DestroyEnemy()
     {
+
+
         Destroy(this.gameObject);
     }
 
     public void HurtAnimComplete()
     {
-        gethurt = false;
+        isHurt = false;
         
     }
        

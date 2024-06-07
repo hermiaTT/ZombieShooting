@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 617134565222934873}
   - component: {fileID: 761803155091308054}
-  - component: {fileID: 7198378415434275459}
   - component: {fileID: 2592005425821069524}
   - component: {fileID: 7521863027690668447}
   - component: {fileID: 5765303820654188035}
@@ -90,19 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7198378415434275459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212048118361461496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 273183d6c66e0fe4bb6b5b9bead33d91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!61 &2592005425821069524
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -210,6 +196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerHealthCurrent: 100
   playerHealthMax: 100
+  speed: 5
 --- !u!1 &2084140295751965173
 GameObject:
   m_ObjectHideFlags: 0

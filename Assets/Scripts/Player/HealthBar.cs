@@ -1,28 +1,39 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
 
+    //health bar control support
+    Slider healthSlider;
+
+
+    //health bar follow palyer
     [SerializeField]
     private GameObject healthBarFollow;
     private Transform targetPosition;
-    // Start is called before the first frame update
+
+
     void Start()
     {
        targetPosition = healthBarFollow.GetComponent<Transform>();
+       healthSlider = gameObject.GetComponent<Slider>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetMaxHealth(float maxhealth)
     {
-        gameObject.transform.position = targetPosition.position;
-
-
+        healthSlider.maxValue = maxhealth;
+        healthSlider.value = maxhealth;
     }
 
-  
+    public void SetHealth(float health)
+    {
+        healthSlider.value = health;
+    }
+
+
 
 
 }
