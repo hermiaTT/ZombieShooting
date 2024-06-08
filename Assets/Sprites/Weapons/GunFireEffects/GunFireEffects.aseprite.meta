@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4ed0ecfc6dbab6f439b7b610748d8292
+guid: 579237b3d0c8f2e498c58dad0eae2183
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -35,7 +35,7 @@ ScriptedImporter:
     spriteMeshType: 1
     alignment: 0
     spritePivot: {x: 0.5, y: 0.5}
-    spritePixelsToUnits: 100
+    spritePixelsToUnits: 32
     spriteBorder: {x: 0, y: 0, z: 0, w: 0}
     spriteGenerateFallbackPhysicsShape: 0
     generateCubemap: 6
@@ -97,7 +97,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638529745338011171
+  platformSettingsDirtyTick: 638533673026408466
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Bullet Revolver_Frame_0
+  - name: GunFireEffects_Frame_0
     originalName: 
-    pivot: {x: 0.5294118, y: 0.5555556}
+    pivot: {x: 0.72727275, y: 0.6}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
-      y: 26
-      width: 17
-      height: 9
-    spriteID: 000515cfc7176ad4db17a3b9de8a4357
+      y: 69
+      width: 22
+      height: 15
+    spriteID: 97d8611e072938f44ac13047afe5b0dd
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -140,19 +140,39 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 2, y: 23}
-  - name: Bullet Revolver_Frame_1
+    uvTransform: {x: 4, y: 69}
+  - name: GunFireEffects_Frame_1
     originalName: 
-    pivot: {x: 0.5714286, y: 0.5}
+    pivot: {x: 0.5, y: 0.47826087}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 38
+      width: 30
+      height: 23
+    spriteID: 3c1e2907c161bc84190f2738180e7fd5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 38}
+  - name: GunFireEffects_Frame_2
+    originalName: 
+    pivot: {x: 0.516129, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 14
-      height: 14
-    spriteID: 29e3b3960f6a2bc44984b52df9bf6912
+      width: 31
+      height: 26
+    spriteID: 57c9b38021038a547ad158eb7e20ff47
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -160,32 +180,96 @@ ScriptedImporter:
     indices: 
     edges: []
     tessellationDetail: 0
-    uvTransform: {x: 1, y: 3}
+    uvTransform: {x: 4, y: 4}
+  - name: GunFireEffects_Frame_3
+    originalName: 
+    pivot: {x: 2, y: 0.45000002}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 42
+      y: 38
+      width: 8
+      height: 20
+    spriteID: 3f7227b9e40a09d468b3009f4d53ad89
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 42, y: 38}
+  - name: GunFireEffects_Frame_4
+    originalName: 
+    pivot: {x: 4, y: 0.53333336}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 4
+      width: 4
+      height: 15
+    spriteID: e27fb8615f8d4f545b407252b4d194ae
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 4}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 624940517
-    name: Bullet Revolver
+    guid: 1602947330
+    name: GunFireEffects
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Bullet Revolver_Frame_0
+    - name: GunFireEffects_Frame_0
       frameIndex: 0
       cellRect:
-        x: 5
-        y: 8
-        width: 21
-        height: 16
-      spriteId: 000515cfc7176ad4db17a3b9de8a4357
-    - name: Bullet Revolver_Frame_1
+        x: 0
+        y: 7
+        width: 22
+        height: 15
+      spriteId: 97d8611e072938f44ac13047afe5b0dd
+    - name: GunFireEffects_Frame_1
       frameIndex: 1
       cellRect:
-        x: 5
+        x: 1
+        y: 5
+        width: 30
+        height: 23
+      spriteId: 3c1e2907c161bc84190f2738180e7fd5
+    - name: GunFireEffects_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 0
+        y: 3
+        width: 31
+        height: 26
+      spriteId: 57c9b38021038a547ad158eb7e20ff47
+    - name: GunFireEffects_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 0
+        y: 7
+        width: 8
+        height: 20
+      spriteId: 3f7227b9e40a09d468b3009f4d53ad89
+    - name: GunFireEffects_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 0
         y: 8
-        width: 21
-        height: 16
-      spriteId: 29e3b3960f6a2bc44984b52df9bf6912
+        width: 4
+        height: 15
+      spriteId: e27fb8615f8d4f545b407252b4d194ae
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -213,7 +297,31 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  - name: WebGL
+  - name: Android
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: iPhone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Windows Store Apps
     overridden: 0
     ignorePlatformSupport: 0
     maxTextureSize: 2048

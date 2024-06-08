@@ -50,7 +50,6 @@ public class PlayerBehaviour : MonoBehaviour
 
         currentScale = gameObject.transform.localScale;
 
-        
     }
 
     // Update is called once per frame

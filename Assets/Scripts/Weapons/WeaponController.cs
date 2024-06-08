@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
+    //bool for is attacking
+    public bool isAttack;
+    [SerializeField]
+    GameObject FireEffectPrefab;
+    [SerializeField]
+    Transform spawnPoint;
+
     //flip player support
     bool facingRight = true;
 
@@ -21,6 +28,13 @@ public class WeaponController : MonoBehaviour
     private GameObject bulletPrefab;
     [SerializeField]
     private Transform muzzle;
+
+
+    public bool IsAttack
+    {
+        get { return isAttack; }
+    }
+
 
 
     // Start is called before the first frame update
@@ -66,9 +80,22 @@ public class WeaponController : MonoBehaviour
                 GameObject temp = Instantiate(bulletPrefab, muzzle.position, Quaternion.identity);
                 temp.GetComponent<BulletController>().SetDirection(direction);
                 temp.transform.rotation = rotation;
+                
+                isAttack = true;
+            } 
+            else
+            {
+                isAttack = false;
             }
             spawnTimer.Run();
+
+            if (isAttack)
+            {
+                Instantiate(FireEffectPrefab, muzzle.position, Quaternion.identity);
+            }
         }
+
+        
 
 
     }

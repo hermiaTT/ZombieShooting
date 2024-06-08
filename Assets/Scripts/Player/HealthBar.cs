@@ -9,16 +9,8 @@ public class HealthBar : MonoBehaviour
     //health bar control support
     Slider healthSlider;
 
-
-    //health bar follow palyer
-    [SerializeField]
-    private GameObject healthBarFollow;
-    private Transform targetPosition;
-
-
     void Start()
     {
-       targetPosition = healthBarFollow.GetComponent<Transform>();
        healthSlider = gameObject.GetComponent<Slider>();
     }
 
