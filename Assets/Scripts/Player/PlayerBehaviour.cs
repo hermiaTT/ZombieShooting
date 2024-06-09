@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+
+    #region Player basic support
+
     //Player basic support
     [SerializeField]
     private float playerHealthCurrent;
@@ -13,23 +16,29 @@ public class PlayerBehaviour : MonoBehaviour
     private float playerHealthMax;
 
     HealthSystem healthSystem;
+    //move support
+    [SerializeField]
+    private float speed =6f;
+
+    bool canPickUp;
+    GameObject itemNeedToPick;
+    WeaponSystem weaponSystem;
+    #endregion
+
+    #region Moving Support
 
     //control key support
     float horizonralMove;
     float verticalMove;
+    #endregion
 
-    //move support
-    [SerializeField]
-    private float speed = 5f;
-
-    //flip player support
-    bool facingRight = true;
-    Vector3 currentScale;
-
-
+    #region Health Bar support
     //player health bar control
     [SerializeField]
     HealthBar healthBar;
+    #endregion
+
+    #region Animation Support
 
     //Player animation states
     Animator playerAnimator;
@@ -40,10 +49,18 @@ public class PlayerBehaviour : MonoBehaviour
     const string PlAYER_RUN = "Player_Run";
     const string PlAYER_DEAD = "Player_Dead";
     const string PlAYER_HURT = "Player_Hurt";
+    //flip player support
+    bool facingRight = true;
+    Vector3 currentScale;
+    #endregion
 
     // Start is called before the first frame update
     void Start()
     {
+
+        //weaponSystem = GetComponent<WeaponSystem>();
+  
+
         healthSystem = new HealthSystem(playerHealthCurrent, playerHealthMax);
 
         playerAnimator = gameObject.GetComponent<Animator>();
@@ -55,7 +72,6 @@ public class PlayerBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         #region Moving Method
 
         //Movement method
@@ -71,6 +87,10 @@ public class PlayerBehaviour : MonoBehaviour
         {
             position.y += verticalMove * speed * Time.deltaTime;
             isRun = true;
+        }
+        else
+        {
+            isRun = false;
         }
         transform.position = position;
 
@@ -88,10 +108,9 @@ public class PlayerBehaviour : MonoBehaviour
         }
         #endregion
 
-        healthSystem.DeadCheck();
-
+        #region Animation Control
         //Animation Control
-        if (!isHurt && !healthSystem.IsDead && !isRun)
+        if (!isHurt && !healthSystem.isDead && !isRun)
         {
             playerAnimator.Play(PlAYER_IDLE);
         }
@@ -107,11 +126,25 @@ public class PlayerBehaviour : MonoBehaviour
         {
             playerAnimator.Play(PlAYER_DEAD);
         }
+        #endregion
 
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            WeaponSystem.Instance.SwitchActiveSlot();
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            WeaponSystem.Instance.DropWeapon();
+        }
+        if (itemNeedToPick && canPickUp && Input.GetKeyDown(KeyCode.E))
+        {
+            WeaponSystem.Instance.PickUpWeapon(itemNeedToPick.gameObject);
+        }
 
     }
 
-
+    #region Enemy Collision Detect
 
     //Player collision detect
     public void OnCollisionEnter2D(Collision2D collision)
@@ -131,6 +164,20 @@ public class PlayerBehaviour : MonoBehaviour
             isHurt = true;
         }
     }
+    #endregion
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        
+        //if collision with weapon
+        if (collision.gameObject.tag == ("Weapon"))
+        {
+            canPickUp = true;
+            itemNeedToPick = collision.gameObject;
+        }
+    }
+
+    #region Animation method
 
     //Player scale control
     void Flip()
@@ -186,4 +233,5 @@ public class PlayerBehaviour : MonoBehaviour
     {
         Destroy(gameObject);
     }
+    #endregion
 }

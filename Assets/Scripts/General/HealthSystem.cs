@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HealthSystem 
+public class HealthSystem
 {
 
     //fields
     float currentHealth;
     float currentmaxHealth;
-    bool isDead = false;
+    public bool isDead = false;
 
     //properties
     public float Health
@@ -40,6 +40,10 @@ public class HealthSystem
         get 
         {
             return isDead;
+        }
+        set 
+        { 
+            return;
         }
     }
 

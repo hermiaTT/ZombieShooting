@@ -118,11 +118,6 @@ public class EnemyBehaviour : MonoBehaviour
         if (player.transform.position.x > transform.position.x && !facingRight) Flip();
     
 
-
-
-        //dead check
-        healthSystem.DeadCheck();
-
         //animation control
        if(!isHurt && !healthSystem.IsDead && !chasing) 
         {

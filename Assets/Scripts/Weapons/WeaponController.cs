@@ -30,6 +30,18 @@ public class WeaponController : MonoBehaviour
     private Transform muzzle;
 
 
+    public Vector2 spawnPosition;
+    //item picked up
+    public bool isActiveWeapon;
+    BoxCollider2D collisionSet;
+    //bool isActive;
+    //public bool IsActive
+    //{
+    //    get { return isActive; } 
+    //}
+    
+
+
     public bool IsAttack
     {
         get { return isAttack; }
@@ -40,8 +52,9 @@ public class WeaponController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_Transform = this.transform;
+        collisionSet = gameObject.GetComponent<BoxCollider2D>();
 
+        m_Transform = this.transform;
 
         // create and start timer
         spawnTimer = gameObject.AddComponent<Timer>();
@@ -52,54 +65,60 @@ public class WeaponController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Rotation method
-        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        direction = direction.normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (direction.x > 0 && !facingRight)
+        if (isActiveWeapon) 
         {
-            Flip();
-        }
-        if (direction.x < 0 && facingRight)
-        {
+            #region Weapon Rotation
+            //Rotation method
+            Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            direction = direction.normalized;
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            Flip();
-        }
-
-        m_Transform.rotation = rotation;
-
-
-        //spawn bullet
-        if (spawnTimer.Finished)
-        {
-            //bullet spawn
-            if (Input.GetAxis("Fire1") != 0)
+            if (direction.x > 0 && !facingRight)
             {
-                GameObject temp = Instantiate(bulletPrefab, muzzle.position, Quaternion.identity);
-                temp.GetComponent<BulletController>().SetDirection(direction);
-                temp.transform.rotation = rotation;
-                
-                isAttack = true;
-            } 
-            else
-            {
-                isAttack = false;
+                Flip();
             }
-            spawnTimer.Run();
-
-            if (isAttack)
+            if (direction.x < 0 && facingRight)
             {
-                Instantiate(FireEffectPrefab, muzzle.position, Quaternion.identity);
+
+                Flip();
             }
+
+            m_Transform.rotation = rotation;
+            #endregion
+
+            #region Bullet Spawn
+            //spawn bullet
+            if (spawnTimer.Finished)
+            {
+                //bullet spawn
+                if (Input.GetAxis("Fire1") != 0)
+                {
+                    GameObject temp = Instantiate(bulletPrefab, muzzle.position, Quaternion.identity);
+                    temp.GetComponent<BulletController>().SetDirection(direction);
+                    temp.transform.rotation = rotation;
+
+                    isAttack = true;
+                }
+                else
+                {
+                    isAttack = false;
+                }
+                spawnTimer.Run();
+
+                if (isAttack)
+                {
+                    Instantiate(FireEffectPrefab, muzzle.position, Quaternion.identity);
+                }
+            }
+            #endregion         
         }
-
-        
-
-
     }
 
+    #region Flip Method
+
+    //Flip Methond
     void Flip()
     {
         Vector3 currentScale = gameObject.transform.localScale;
@@ -109,6 +128,5 @@ public class WeaponController : MonoBehaviour
 
         facingRight = !facingRight;
     }
-
-
+    #endregion
 }
