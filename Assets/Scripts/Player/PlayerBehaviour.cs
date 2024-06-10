@@ -19,14 +19,17 @@ public class PlayerBehaviour : MonoBehaviour
     //move support
     [SerializeField]
     private float speed =6f;
+    #endregion
 
+    #region WeaponSystem Support
+    //Weapon System support
     bool canPickUp;
     GameObject itemNeedToPick;
     WeaponSystem weaponSystem;
+    GameObject currentWeapon;
     #endregion
 
     #region Moving Support
-
     //control key support
     float horizonralMove;
     float verticalMove;
@@ -50,7 +53,7 @@ public class PlayerBehaviour : MonoBehaviour
     const string PlAYER_DEAD = "Player_Dead";
     const string PlAYER_HURT = "Player_Hurt";
     //flip player support
-    bool facingRight = true;
+    public bool facingRight = true;
     Vector3 currentScale;
     #endregion
 
@@ -59,7 +62,7 @@ public class PlayerBehaviour : MonoBehaviour
     {
 
         //weaponSystem = GetComponent<WeaponSystem>();
-  
+
 
         healthSystem = new HealthSystem(playerHealthCurrent, playerHealthMax);
 
@@ -182,6 +185,7 @@ public class PlayerBehaviour : MonoBehaviour
     //Player scale control
     void Flip()
     {
+        //while use flip, the weapon on his hand should be flipped
         currentScale = gameObject.transform.localScale;
         currentScale.x *= -1;
         gameObject.transform.localScale = currentScale;

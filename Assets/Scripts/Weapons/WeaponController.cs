@@ -11,8 +11,6 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     Transform spawnPoint;
 
-    //flip player support
-    bool facingRight = true;
 
     //rotation support
     private Transform m_Transform;
@@ -34,13 +32,12 @@ public class WeaponController : MonoBehaviour
     //item picked up
     public bool isActiveWeapon;
     BoxCollider2D collisionSet;
-    //bool isActive;
-    //public bool IsActive
-    //{
-    //    get { return isActive; } 
-    //}
-    
 
+    //Weapon Drop support
+    bool drop;
+    public float throwSpeed = 0.5f;
+    PlayerBehaviour playerBehaviour;
+    Rigidbody2D rb2d;
 
     public bool IsAttack
     {
@@ -52,7 +49,11 @@ public class WeaponController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb2d = GetComponent<Rigidbody2D>();
+
         collisionSet = gameObject.GetComponent<BoxCollider2D>();
+
+        playerBehaviour = GetComponent<PlayerBehaviour>();
 
         m_Transform = this.transform;
 
@@ -75,15 +76,10 @@ public class WeaponController : MonoBehaviour
             float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-            if (direction.x > 0 && !facingRight)
-            {
-                Flip();
-            }
-            if (direction.x < 0 && facingRight)
-            {
-
-                Flip();
-            }
+            Vector3 currentScale = gameObject.transform.localScale;
+            currentScale.x = GameObject.FindWithTag("Player").transform.localScale.x;
+            currentScale.y = currentScale.x == 1 ? 1 : -1;
+            gameObject.transform.localScale = currentScale;
 
             m_Transform.rotation = rotation;
             #endregion
@@ -114,19 +110,32 @@ public class WeaponController : MonoBehaviour
             }
             #endregion         
         }
+
+
     }
-
-    #region Flip Method
-
-    //Flip Methond
-    void Flip()
+    public void DropWeapon()
     {
-        Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.y *= -1;
-        currentScale.x *= -1;
-        gameObject.transform.localScale = currentScale;
+        gameObject.transform.SetParent(null);
+        gameObject.transform.position = GameObject.FindWithTag("Player").transform.position;
+        gameObject.transform.localRotation = Quaternion.identity;
+        //set rotation to 0, and set scale to the direction when dropped
+        gameObject.transform.rotation = Quaternion.identity;
+        gameObject.transform.localScale = new Vector3(GameObject.FindWithTag("Player").transform.localScale.x, 1, 1);
 
-        facingRight = !facingRight;
+        //add force to drop
+        Vector3 currentScale = gameObject.transform.localScale;
+        rb2d.velocity = new Vector3(currentScale.x * throwSpeed, -currentScale.y, currentScale.z);
+        rb2d.AddForce(rb2d.velocity, ForceMode2D.Impulse);
+        //set direction to the direction it is dropped
+        isActiveWeapon = false;
+
     }
-    #endregion
+
+    public void ActiveWeapon(GameObject parentSlot, Transform spwanPosition)
+    {
+        gameObject.transform.SetParent(parentSlot.transform, false);
+        gameObject.transform.position = spwanPosition.position;
+    }
+
+
 }

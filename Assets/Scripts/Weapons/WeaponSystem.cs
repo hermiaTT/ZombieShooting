@@ -40,9 +40,12 @@ public class WeaponSystem : MonoBehaviour
     private void AddWeaponIntoActiveBag(GameObject newWeapon)
     {
         var vacantIndex = currentWeaponIndex == 1 ? 0 : 1;
-        activeWeaponSlot = weaponBag[vacantIndex]; 
-        newWeapon.transform.SetParent(activeWeaponSlot.transform, false);
-        newWeapon.transform.position = spawnPosition.position;
+        activeWeaponSlot = weaponBag[vacantIndex];
+        WeaponController currentWeapon = newWeapon.GetComponent<WeaponController>();
+        currentWeapon.ActiveWeapon(activeWeaponSlot, spawnPosition);
+        //newWeapon.transform.SetParent(activeWeaponSlot.transform, false);
+        //newWeapon.transform.position = spawnPosition.position;
+        
         currentWeaponIndex = vacantIndex;
         currentWeaponCount++;
 
@@ -53,9 +56,9 @@ public class WeaponSystem : MonoBehaviour
         DropCurrentWeapon();
 
         //add new weapon to current index
-        newWeapon.transform.SetParent(activeWeaponSlot.transform, false);
-        newWeapon.transform.position = spawnPosition.position;
-  
+        WeaponController currentWeapon = newWeapon.GetComponent<WeaponController>();
+        currentWeapon.ActiveWeapon(activeWeaponSlot, spawnPosition);
+
 
     }
     private void ActiveCurrentWeapon()
@@ -68,8 +71,7 @@ public class WeaponSystem : MonoBehaviour
             if (weaponBag[i].transform && weaponBag[i].transform.childCount >0)
             {
                 weapon = weaponBag[i].transform.GetChild(0).gameObject;
-                //check if current slot has weapon
-                //check if is current weapon
+ 
                 if(i== currentWeaponIndex)
                 {
                     //set active in element and in activeSlot
@@ -97,9 +99,8 @@ public class WeaponSystem : MonoBehaviour
     {
         var weaponToDrop = activeWeaponSlot.transform.GetChild(0).gameObject;
         WeaponController currentWeapon = weaponToDrop.GetComponent<WeaponController>();
-        weaponToDrop.transform.SetParent(null);
-        weaponToDrop.transform.position = GameObject.FindWithTag("Player").transform.position;
-        currentWeapon.isActiveWeapon = false;
+        currentWeapon.DropWeapon();
+       
     }
     public void PickUpWeapon(GameObject newWeapon)
     {
@@ -119,7 +120,7 @@ public class WeaponSystem : MonoBehaviour
         {
 
             DropCurrentWeapon();
-              currentWeaponCount--;
+            currentWeaponCount--;
             //if there is no weapon in player's hand, set currentWeaponIndex to negative and return -1 
             if (currentWeaponCount == 0) currentWeaponIndex = -1;
             else currentWeaponIndex = currentWeaponIndex == 1 ? 0 : 1;
