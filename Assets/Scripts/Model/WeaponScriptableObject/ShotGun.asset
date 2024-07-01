@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d8a7f0a8bd0086439a58ab27fe9938d, type: 3}
+  m_Name: ShotGun
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: ShotGun
+  <Description>k__BackingField: pengpengpeng
+  <ItemImage>k__BackingField: {fileID: -3406754537314335631, guid: 4bd1d34abd03da4488c9532704c3b6d2, type: 3}
+  shotType: 0
+  <shootSpeed>k__BackingField: 0
+  <clipCapacity>k__BackingField: 0
+  bulletPrefab: {fileID: -2253911629886400664, guid: 493691bcaaecee240809bb18d746f992, type: 3}

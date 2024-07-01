@@ -12,8 +12,7 @@ GameObject:
   - component: {fileID: 761803155091308054}
   - component: {fileID: 2592005425821069524}
   - component: {fileID: 7521863027690668447}
-  - component: {fileID: 5765303820654188035}
-  - component: {fileID: 233273823409776674}
+  - component: {fileID: 9029669553317110238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -77,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1564755701
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 171740254448091246, guid: 9503a01d9553cd04fb91add907a1a825, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -150,7 +149,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 30
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -162,9 +161,9 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
---- !u!95 &5765303820654188035
+--- !u!95 &9029669553317110238
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -186,22 +185,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &233273823409776674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1212048118361461496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6e3c035e404f214cb3f147a3f950ca1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealthCurrent: 100
-  playerHealthMax: 100
-  speed: 5
-  healthBar: {fileID: 0}
 --- !u!1 &4163610345006517319
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +195,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1601489457281982282}
   m_Layer: 0
-  m_Name: WeaponHolder
+  m_Name: WeaponBag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -227,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 4163610345006517319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.298, y: -0.165, z: 0}
+  m_LocalPosition: {x: 0.04, y: -0.165, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -245,7 +228,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2101976819692378076}
   m_Layer: 0
-  m_Name: WeaponBag2
+  m_Name: WeaponSlot_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1136624604256543541}
   m_Layer: 0
-  m_Name: WeaponBag1
+  m_Name: WeaponSlot_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
