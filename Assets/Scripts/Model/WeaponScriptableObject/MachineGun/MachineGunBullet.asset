@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40dca855f6314a74db80c375f82576be, type: 3}
   m_Name: MachineGunBullet
   m_EditorClassIdentifier: 
-  bulletName: MachineGunBullet
-  bulletSpeed: 50
-  bulletDamage: 10
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: 
+  <Description>k__BackingField: 
+  <ItemImage>k__BackingField: {fileID: -8207173936956119293, guid: 4ed0ecfc6dbab6f439b7b610748d8292, type: 3}
+  <bulletSpeed>k__BackingField: 0
+  <bulletDamage>k__BackingField: 0

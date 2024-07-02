@@ -18,6 +18,8 @@ namespace Inventory
         [SerializeField]
         private InventorySO inventoryData;
 
+        public List<InventoryItem> initialItems = new List<InventoryItem>();
+
         private void Awake()
         {
 
@@ -26,15 +28,31 @@ namespace Inventory
         private void Start()
         {
             PrepareUI();
-            //inventoryData.Initialize();
+            PrepareInventoryData();
 
             input.InventoryOpenEvent += HandleInventoryOpen;
             input.InventoryCloseEvent += HandleIncentoryClose;
         }
 
-        public void Update()
+        private void PrepareInventoryData()
         {
+            inventoryData.Initialize();
+            inventoryData.OnInventoryUpdated += UpdateInventoryUI;
+            foreach (InventoryItem item in initialItems)
+            {
+                if (item.isEmpty)
+                    continue;
+                inventoryData.AddItem(item);
+            }
+        }
 
+        private void UpdateInventoryUI(Dictionary<int, InventoryItem> inventoryState)
+        {
+            inventoryUI.ResetAllItems();
+            foreach (var item in inventoryState)
+            {
+                inventoryUI.UpdateData(item.Key, item.Value.item.ItemImage, item.Value.quantity);
+            }
         }
 
         private void PrepareUI()
@@ -53,12 +71,15 @@ namespace Inventory
 
         private void HandleDragging(int itemIndex)
         {
-
+            InventoryItem inventoryItem =inventoryData.GetItemAt(itemIndex);
+            if(inventoryItem.isEmpty)
+                return;
+            inventoryUI.CreateDraggedItem(inventoryItem.item.ItemImage, inventoryItem.quantity);
         }
 
         private void HandleSwapItems(int itemIndex_1, int itemIndex_2)
         {
-
+            inventoryData.SwapItems(itemIndex_1, itemIndex_2);
         }
 
         private void HandelDescriptionRequest(int itemIndex)
