@@ -41,6 +41,10 @@ public class InputReader : ScriptableObject, GameInput.IPlayerActions, GameInput
     public event Action InventoryOpenEvent;
     public event Action InventoryCloseEvent;
 
+    public event Action InventoryItemActionEvent;
+
+    public event Action InventoryItemSelectEvent;
+
 
     public void SetGamePlayer()
     {
@@ -104,5 +108,28 @@ public class InputReader : ScriptableObject, GameInput.IPlayerActions, GameInput
             InventoryCloseEvent?.Invoke();
             SetGameplay();
         }
+    }
+
+    public void OnItemAction(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            InventoryItemActionEvent?.Invoke();
+        }
+        
+    }
+
+    public void OnItemSelect(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            InventoryItemSelectEvent?.Invoke();
+            
+        }
+    }
+
+    public void OnMousePosition(InputAction.CallbackContext context)
+    {
+        
     }
 }

@@ -18,6 +18,10 @@ namespace Inventory.UI
         private UIInventoryDescription itemDescription;
 
         [SerializeField]
+        private GameInput input;
+
+
+        [SerializeField]
         private MouseFollower mouseFollower;
 
         List<UIInventoryItem> listOfUIItems = new List<UIInventoryItem>();
@@ -30,11 +34,21 @@ namespace Inventory.UI
 
         public event Action<int, int> OnSwapItems;
 
+        public event Action<int> OnEquipToHand; 
+
+        [SerializeField]
+        private ItemActionPanel actionPanel;
+
         private void Awake()
         {
             Hide();
             mouseFollower.Toggle(false);
             itemDescription.ResetDescription();
+        }
+
+        public void HandleEquipToHand(int ID)
+        {
+            
         }
 
         public void InitializeInventoryUI(int inventorySize)
@@ -58,6 +72,7 @@ namespace Inventory.UI
             itemDescription.SetDescription(itemImage, name, description);
             DeSelectAllItems();
             listOfUIItems[itemIndex].Select();
+            
         }
 
 
@@ -71,7 +86,13 @@ namespace Inventory.UI
 
         private void HandleShowItemActions(UIInventoryItem inventoryItemUI)
         {
-
+            int index = listOfUIItems.IndexOf(inventoryItemUI);
+            if (index == -1)
+            {
+                ResetDraggedItem();
+                return;
+            }
+            OnItemActionRequested?.Invoke(index);
         }
 
 
@@ -117,6 +138,7 @@ namespace Inventory.UI
 
         private void HandleItemSelection(UIInventoryItem inventoryItemUI)
         {
+            
             int index = listOfUIItems.IndexOf(inventoryItemUI);
             if (index == -1)
                 return;
@@ -129,7 +151,7 @@ namespace Inventory.UI
 
 
             ResetSelection();
-            Debug.Log("Show");
+            
         }
 
         public void ResetSelection()
@@ -138,19 +160,34 @@ namespace Inventory.UI
             DeSelectAllItems();
         }
 
+
+        public void AddAction(string actionName, Action perfomAction)
+        {
+            actionPanel.AddButton(actionName, perfomAction);
+        }
+
+        public void ShowItemAction(int itemIndex)
+        {
+            actionPanel.Toggle(true);
+            actionPanel.transform.position = listOfUIItems[itemIndex].transform.position;
+        }
+
         private void DeSelectAllItems()
         {
             foreach (UIInventoryItem item in listOfUIItems)
             {
                 item.Deselect();
             }
+
+            actionPanel.Toggle(false);
         }
 
         public void Hide()
         {
+            actionPanel.Toggle(false);
             this.gameObject.SetActive(false);
             ResetDraggedItem();
-            Debug.Log("Hide");
+            
         }
 
         internal void ResetAllItems()

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "NewBullet")]
 public class BulletData : ItemSO
 {
     [field: SerializeField]

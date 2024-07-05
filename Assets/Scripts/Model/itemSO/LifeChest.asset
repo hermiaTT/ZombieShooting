@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5df3aadae399c4fb1fb8d7a911a798, type: 3}
+  m_Name: LifeChest
+  m_EditorClassIdentifier: 
+  <IsStackable>k__BackingField: 1
+  <MaxStackSize>k__BackingField: 99
+  <Name>k__BackingField: LifeChest
+  <Description>k__BackingField: ohohoh
+  <ItemImage>k__BackingField: {fileID: -6805983807838639456, guid: 2085bc2f4e03e5247815cde8df517599, type: 3}
+  modifiersData:
+  - statModifier: {fileID: 11400000, guid: 272cd6ab39863fb469d5b4503d370198, type: 2}
+    value: 5

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
-abstract public class Weapons : MonoBehaviour, IPickable
+abstract public class Weapons : MonoBehaviour
 {
     [SerializeField]
     Transform muzzle;
@@ -13,7 +13,7 @@ abstract public class Weapons : MonoBehaviour, IPickable
     protected float nextTimeToFire = 0f;
 
     [SerializeField]
-    public WeaponData weapon;
+    public GunSO weapon;
 
     public InputReader input;
 
@@ -69,14 +69,14 @@ abstract public class Weapons : MonoBehaviour, IPickable
     {
         if (isFire)
         {
-            if (weapon.shotType == WeaponData.ShotType.Auto)
+            if (weapon.shotType == GunSO.ShotType.Auto)
             {
                 if(CheckShootSpeed())
                 {
                     SpawnBullet();
                 }
             }
-            else if(weapon.shotType == WeaponData.ShotType.Single)
+            else if(weapon.shotType == GunSO.ShotType.Single)
             {
                 SpawnBullet();
                 isFire = false;

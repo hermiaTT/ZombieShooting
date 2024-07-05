@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu (fileName = "NewWeapon")]
-public class WeaponData : ItemSO
+
+public class GunSO : EquippableItemSO
 {
     public ShotType shotType;
 
@@ -17,7 +17,6 @@ public class WeaponData : ItemSO
     [SerializeField]
     public GameObject bulletPrefab;
 
-    
 
     public enum ShotType
     {

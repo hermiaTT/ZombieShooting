@@ -17,7 +17,10 @@ MonoBehaviour:
   <Name>k__BackingField: MachineGun
   <Description>k__BackingField: dadada
   <ItemImage>k__BackingField: {fileID: 819215235717751802, guid: 38a493e3458b20d4eae47f16f8f9864d, type: 3}
+  <DefaultParametersList>k__BackingField:
+  - itemParameter: {fileID: 11400000, guid: 55291d683dcb99a4491e7ef19ba31e16, type: 2}
+    value: 100
   shotType: 1
-  <shootSpeed>k__BackingField: 0
-  <clipCapacity>k__BackingField: 0
+  <ShootSpeed>k__BackingField: 3
+  <ClipCapacity>k__BackingField: 10
   bulletPrefab: {fileID: 5790876294380774873, guid: e0a3a0c7e3106484b8f7fb6fa0c7ef01, type: 3}

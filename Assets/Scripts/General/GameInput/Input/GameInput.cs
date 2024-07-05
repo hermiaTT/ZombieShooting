@@ -188,6 +188,33 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemAction"",
+                    ""type"": ""Button"",
+                    ""id"": ""6cc7fcef-3bad-41ac-a0e0-67bae4fdac74"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ItemSelect"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef5608f1-283e-4cfd-b30b-b1c9181f1321"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5ceaeb5c-b9ea-4065-8df7-e9473e3eef8b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -199,6 +226,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""InventoryClose"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7367feb2-e500-49d5-840d-811f274887bb"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": ""MultiTap"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemAction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4e0e2e2-e1a0-4b6a-a255-c08fa3701af8"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ItemSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""296c173c-b25a-4256-8d91-eb5fce3b3bbc"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -217,6 +277,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         // PlayerUI
         m_PlayerUI = asset.FindActionMap("PlayerUI", throwIfNotFound: true);
         m_PlayerUI_InventoryClose = m_PlayerUI.FindAction("InventoryClose", throwIfNotFound: true);
+        m_PlayerUI_ItemAction = m_PlayerUI.FindAction("ItemAction", throwIfNotFound: true);
+        m_PlayerUI_ItemSelect = m_PlayerUI.FindAction("ItemSelect", throwIfNotFound: true);
+        m_PlayerUI_MousePosition = m_PlayerUI.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     ~@GameInput()
@@ -363,11 +426,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_PlayerUI;
     private List<IPlayerUIActions> m_PlayerUIActionsCallbackInterfaces = new List<IPlayerUIActions>();
     private readonly InputAction m_PlayerUI_InventoryClose;
+    private readonly InputAction m_PlayerUI_ItemAction;
+    private readonly InputAction m_PlayerUI_ItemSelect;
+    private readonly InputAction m_PlayerUI_MousePosition;
     public struct PlayerUIActions
     {
         private @GameInput m_Wrapper;
         public PlayerUIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @InventoryClose => m_Wrapper.m_PlayerUI_InventoryClose;
+        public InputAction @ItemAction => m_Wrapper.m_PlayerUI_ItemAction;
+        public InputAction @ItemSelect => m_Wrapper.m_PlayerUI_ItemSelect;
+        public InputAction @MousePosition => m_Wrapper.m_PlayerUI_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_PlayerUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -380,6 +449,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @InventoryClose.started += instance.OnInventoryClose;
             @InventoryClose.performed += instance.OnInventoryClose;
             @InventoryClose.canceled += instance.OnInventoryClose;
+            @ItemAction.started += instance.OnItemAction;
+            @ItemAction.performed += instance.OnItemAction;
+            @ItemAction.canceled += instance.OnItemAction;
+            @ItemSelect.started += instance.OnItemSelect;
+            @ItemSelect.performed += instance.OnItemSelect;
+            @ItemSelect.canceled += instance.OnItemSelect;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
         }
 
         private void UnregisterCallbacks(IPlayerUIActions instance)
@@ -387,6 +465,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @InventoryClose.started -= instance.OnInventoryClose;
             @InventoryClose.performed -= instance.OnInventoryClose;
             @InventoryClose.canceled -= instance.OnInventoryClose;
+            @ItemAction.started -= instance.OnItemAction;
+            @ItemAction.performed -= instance.OnItemAction;
+            @ItemAction.canceled -= instance.OnItemAction;
+            @ItemSelect.started -= instance.OnItemSelect;
+            @ItemSelect.performed -= instance.OnItemSelect;
+            @ItemSelect.canceled -= instance.OnItemSelect;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
         }
 
         public void RemoveCallbacks(IPlayerUIActions instance)
@@ -415,5 +502,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     public interface IPlayerUIActions
     {
         void OnInventoryClose(InputAction.CallbackContext context);
+        void OnItemAction(InputAction.CallbackContext context);
+        void OnItemSelect(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

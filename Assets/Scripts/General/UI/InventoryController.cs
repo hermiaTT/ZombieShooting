@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Inventory.UI;
 using Inventory.Model;
+using System.Text;
 
 namespace Inventory
 {
@@ -32,6 +33,7 @@ namespace Inventory
 
             input.InventoryOpenEvent += HandleInventoryOpen;
             input.InventoryCloseEvent += HandleIncentoryClose;
+            
         }
 
         private void PrepareInventoryData()
@@ -66,8 +68,56 @@ namespace Inventory
 
         private void HandleItemActionRequest(int itemIndex)
         {
+            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.isEmpty)
+                return;
 
+            
+
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+                
+                inventoryUI.ShowItemAction(itemIndex);
+                inventoryUI.AddAction(itemAction.ActionName, () => PerformAction(itemIndex));
+            }
+
+            IDestroybleItem destroybleItem = inventoryItem.item as IDestroybleItem;
+            if (destroybleItem != null)
+            {
+                inventoryUI.AddAction("Drop", () => DropItem(itemIndex, inventoryItem.quantity));
+            }
         }
+
+        private void DropItem(int itemIndex, int quantity)
+        {
+            inventoryData.RemoveItem(itemIndex, quantity);
+            inventoryUI.ResetSelection();
+        }
+
+        public void PerformAction(int itemIndex)
+        {
+            InventoryItem inventoryItem = inventoryData.GetItemAt(itemIndex);
+            if (inventoryItem.isEmpty)
+                return;
+
+            IDestroybleItem destroybleItem = inventoryItem.item as IDestroybleItem;
+            if (destroybleItem != null)
+            {
+                inventoryData.RemoveItem(itemIndex, 1);
+            }
+
+            IItemAction itemAction = inventoryItem.item as IItemAction;
+            if (itemAction != null)
+            {
+                itemAction.PerformAction(gameObject, inventoryItem.itemState);
+
+                if(inventoryData.GetItemAt(itemIndex).isEmpty)
+                    inventoryUI.ResetSelection();
+            }
+        }
+
+
 
         private void HandleDragging(int itemIndex)
         {
@@ -91,12 +141,29 @@ namespace Inventory
                 return;
             }
             ItemSO item = inventoryItem.item;
-            inventoryUI.UpdateDescription(itemIndex, item.ItemImage, item.name, item.Description);
+            string description = PrepareDescription(inventoryItem);
+            inventoryUI.UpdateDescription(itemIndex, 
+                item.ItemImage, item.name, description);
+           
+        }
+
+        private string PrepareDescription(InventoryItem inventoryItem)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append(inventoryItem.item.Description);
+            sb.AppendLine();
+            for (int i = 0; i < inventoryItem.itemState.Count; i++)
+            {
+                sb.Append($"{inventoryItem.itemState[i].itemParameter.parameterName} : " +
+                    $"{inventoryItem.itemState[i].value} / " +
+                    $"{inventoryItem.item.DefaultParametersList[i].value}");
+            }
+            return sb.ToString();
         }
 
         public void HandleInventoryOpen()
         {
-            Debug.Log("conShow");
+            
             inventoryUI.Show();
             foreach (var item in inventoryData.GetCurrentInventoryState())
             {
@@ -108,7 +175,7 @@ namespace Inventory
 
         public void HandleIncentoryClose()
         {
-            Debug.Log("conHide");
+            
             inventoryUI.Hide();
         }
     }

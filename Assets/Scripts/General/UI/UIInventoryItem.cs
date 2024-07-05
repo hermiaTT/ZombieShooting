@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 
 namespace Inventory.UI
 {
-    public class UIInventoryItem : MonoBehaviour, IPointerClickHandler,
+    public class UIInventoryItem : MonoBehaviour,IPointerClickHandler,
     IBeginDragHandler, IEndDragHandler, IDropHandler, IDragHandler
     {
         [SerializeField]
@@ -21,6 +21,10 @@ namespace Inventory.UI
         [SerializeField]
         private Image borderImage;
 
+        //[SerializeField]
+        //private InputReader input;
+       
+
         public event Action<UIInventoryItem> OnItemClicked,
             OnItemDroppedOn, OnItemBeginDrag, OnItemEndDrag, OnRightMouseButtonClick;
 
@@ -30,8 +34,23 @@ namespace Inventory.UI
         {
             ResetData();
             Deselect();
-        }
+            
 
+        }
+        private void Start()
+        {
+            //input.InventoryItemActionEvent += HandleRightMouseDoubleClick;
+            //input.InventoryItemSelectEvent += HandleLeftMouseClick;
+
+            
+        }
+        //private void DetectUIObject()
+        //{
+        //    Ray ray = mainCamera.ScreenPointToRay(gameInput.PlayerUI.MousePosition.ReadValue<Vector2>());
+        //    RaycastHit hit;
+
+
+        //}
 
         public void ResetData()
         {
@@ -55,20 +74,21 @@ namespace Inventory.UI
         public void Select()
         {
             borderImage.enabled = true;
+            
         }
 
-        public void OnPointerClick(PointerEventData pointerData)
-        {
+       
 
-            if (pointerData.button == PointerEventData.InputButton.Right)
-            {
-                OnRightMouseButtonClick?.Invoke(this);
-            }
-            else
-            {
-                OnItemClicked?.Invoke(this);
-            }
-        }
+        //public void HandleRightMouseDoubleClick()
+        //{
+        //    OnRightMouseButtonClick?.Invoke(this);
+        //}
+
+        //public void HandleLeftMouseClick()
+        //{
+        //    OnItemClicked?.Invoke(this);
+            
+        //}
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -90,6 +110,18 @@ namespace Inventory.UI
         public void OnDrag(PointerEventData eventData)
         {
 
+        }
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            PointerEventData pointerData = (PointerEventData)eventData;
+            int tap = eventData.clickCount;
+            if(pointerData.button == PointerEventData.InputButton.Right && tap == 2 )
+            {
+                OnRightMouseButtonClick?.Invoke(this);
+            }
+            else if(pointerData.button == PointerEventData.InputButton.Left)
+                OnItemClicked?.Invoke(this);
         }
     }
 }
