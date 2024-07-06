@@ -34,7 +34,6 @@ namespace Inventory.UI
 
         public event Action<int, int> OnSwapItems;
 
-        public event Action<int> OnEquipToHand; 
 
         [SerializeField]
         private ItemActionPanel actionPanel;
@@ -46,10 +45,6 @@ namespace Inventory.UI
             itemDescription.ResetDescription();
         }
 
-        public void HandleEquipToHand(int ID)
-        {
-            
-        }
 
         public void InitializeInventoryUI(int inventorySize)
         {
@@ -200,3 +195,8 @@ namespace Inventory.UI
         }
     }
 }
+
+
+
+
+

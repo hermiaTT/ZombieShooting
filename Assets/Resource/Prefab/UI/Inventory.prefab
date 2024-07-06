@@ -1103,8 +1103,8 @@ RectTransform:
   m_GameObject: {fileID: 5666257889915888765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9125, y: 0.9125, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.78, y: 0.78, z: 0.85479444}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5818381761843747669}
   - {fileID: 3865162518490559997}
@@ -1194,10 +1194,8 @@ MonoBehaviour:
   itemPrefabs: {fileID: -2626700863426462834, guid: 254f0796861d60348801aefaccec7f30, type: 3}
   contentPanel: {fileID: 3508523491973398595}
   itemDescription: {fileID: 2667392830755872373}
-  sprite: {fileID: 819215235717751802, guid: 38a493e3458b20d4eae47f16f8f9864d, type: 3}
-  quantity: 1
-  title: MachineGun
-  description: dadada
+  mouseFollower: {fileID: 0}
+  actionPanel: {fileID: 0}
 --- !u!1 &7304608220084443919
 GameObject:
   m_ObjectHideFlags: 0

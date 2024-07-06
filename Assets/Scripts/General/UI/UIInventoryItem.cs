@@ -76,19 +76,7 @@ namespace Inventory.UI
             borderImage.enabled = true;
             
         }
-
-       
-
-        //public void HandleRightMouseDoubleClick()
-        //{
-        //    OnRightMouseButtonClick?.Invoke(this);
-        //}
-
-        //public void HandleLeftMouseClick()
-        //{
-        //    OnItemClicked?.Invoke(this);
-            
-        //}
+        
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -115,8 +103,8 @@ namespace Inventory.UI
         public void OnPointerClick(PointerEventData eventData)
         {
             PointerEventData pointerData = (PointerEventData)eventData;
-            int tap = eventData.clickCount;
-            if(pointerData.button == PointerEventData.InputButton.Right && tap == 2 )
+            
+            if(pointerData.button == PointerEventData.InputButton.Right)
             {
                 OnRightMouseButtonClick?.Invoke(this);
             }

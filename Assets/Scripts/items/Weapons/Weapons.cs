@@ -19,7 +19,7 @@ abstract public class Weapons : MonoBehaviour
 
     public bool isFire;
 
-    [SerializeField]
+    
     private Camera _Camera;
 
     private Vector2 mousePosition;
@@ -28,7 +28,7 @@ abstract public class Weapons : MonoBehaviour
 
     public void Start()
     {
-
+        _Camera = Camera.main;
         input.FireEvent += HandleFire;
         input.FireCancelEvent += HandleCancelledFire;
 

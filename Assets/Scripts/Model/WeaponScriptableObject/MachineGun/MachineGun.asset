@@ -20,6 +20,7 @@ MonoBehaviour:
   <DefaultParametersList>k__BackingField:
   - itemParameter: {fileID: 11400000, guid: 55291d683dcb99a4491e7ef19ba31e16, type: 2}
     value: 100
+  itemPrefab: {fileID: 8231455889276740594, guid: b5bcbd1d4dccf424581961da52fe78bc, type: 3}
   shotType: 1
   <ShootSpeed>k__BackingField: 3
   <ClipCapacity>k__BackingField: 10

@@ -27,6 +27,8 @@ namespace Inventory.Model
         }
     }
 
+
+    
     public interface IDestroybleItem
     {
 

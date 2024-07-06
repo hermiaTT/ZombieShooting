@@ -21,9 +21,15 @@ namespace Inventory
 
         public List<InventoryItem> initialItems = new List<InventoryItem>();
 
+        [SerializeField]
+        private WeaponSystem weaponSystem;
+
+        [SerializeField]
+        private UIEquipmentPage equipmentUI;
+
         private void Awake()
         {
-
+            
         }
 
         private void Start()
@@ -33,7 +39,13 @@ namespace Inventory
 
             input.InventoryOpenEvent += HandleInventoryOpen;
             input.InventoryCloseEvent += HandleIncentoryClose;
-            
+
+            input.SwitchWeaponEvent += HandleSwitchWeapon;
+
+            if (weaponSystem == null) Debug.LogError("WeaponSystem is not assigned.");
+            if (equipmentUI == null) Debug.LogError("UIEquipmentPage is not assigned.");
+            if (input == null) Debug.LogError("InputReader is not assigned.");
+
         }
 
         private void PrepareInventoryData()
@@ -86,6 +98,30 @@ namespace Inventory
             if (destroybleItem != null)
             {
                 inventoryUI.AddAction("Drop", () => DropItem(itemIndex, inventoryItem.quantity));
+            }
+
+        }
+
+        private void EquipWeapon(EquippableItemSO equippableItem, List<ItemParameter> itemState)
+        {
+            weaponSystem.SetWeapon(equippableItem, itemState);
+            UpdateEquipmentUI(equippableItem); // Update the equipment UI
+        }
+
+        private void UpdateEquipmentUI(EquippableItemSO equippableItem)
+        {
+            equipmentUI.UpdateEquipmentSlot(equippableItem, weaponSystem.activeWeaponIndex);
+        }
+
+        public void HandleSwitchWeapon()
+        {
+            if (weaponSystem != null)
+            {
+                weaponSystem.SwitchWeapon();
+            }
+            else
+            {
+                Debug.LogError("WeaponSystem is not assigned.");
             }
         }
 
@@ -180,3 +216,8 @@ namespace Inventory
         }
     }
 }
+
+
+
+
+

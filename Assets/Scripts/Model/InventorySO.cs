@@ -20,6 +20,8 @@ namespace Inventory.Model
         [SerializeField]
         public event Action<Dictionary<int, InventoryItem>> OnInventoryUpdated;
 
+        //private List<EquippableItemSO> equippedWeapons = new List<EquippableItemSO>(2);
+
         public void Initialize()
         {
             inventoryItems = new List<InventoryItem>();
@@ -29,7 +31,8 @@ namespace Inventory.Model
             }
         }
 
-        //InventoryItem item = new InventoryItem();
+        
+
         public int AddItem(ItemSO item, int quantity, List<ItemParameter> itemState = null)
         {
             if (item.IsStackable == false)

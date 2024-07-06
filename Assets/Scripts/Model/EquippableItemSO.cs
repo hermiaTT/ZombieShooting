@@ -12,6 +12,8 @@ namespace Inventory.Model
 
         public AudioClip actionSFX { get; private set; }
 
+        public GameObject itemPrefab;
+
         public bool PerformAction(GameObject character, List<ItemParameter> itemState = null)
         {
             WeaponSystem weaponSystem = character.GetComponent<WeaponSystem>();
@@ -25,3 +27,8 @@ namespace Inventory.Model
         }
     }
 }
+
+
+
+
+
