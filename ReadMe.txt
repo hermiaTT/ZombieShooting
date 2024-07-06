@@ -14,4 +14,7 @@ Drag Inventory Item => Move Grid or Swap Inventory Item
 
 Pick up item => pick item into inventory
 
+Equip item to hand and switch weapon
+
+show equipped item in the weapon bag UI => not finish yet
  
